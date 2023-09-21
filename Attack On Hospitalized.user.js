@@ -12,12 +12,11 @@
 
     // Function to create the blue button
     function createButton() {
-        const interval = setInterval(() => {
+        const timeout = setTimeout(() => {
             const targetElement = document.querySelector('#defender > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div');
             const targetElement2 = document.querySelector("#defender > div.playerArea___oG4xu > div.playerWindow___FvmHZ > div.modal___lMj6N.defender___niX1M > div > div > div.title___fOh2J")
 
             if (targetElement && targetElement.textContent.includes("This person is currently in hospital and cannot be attacked")) {
-                clearInterval(interval); // Stop checking
                 const Button = document.createElement('button');
                 Button.textContent = 'Attack';
                 Button.style.backgroundColor = 'red';
@@ -35,7 +34,7 @@
                 // Append the button to the target element
                 targetElement.appendChild(Button);
             }
-        }, 1000); // Check every 1 second
+        },1500); // Check after 1.5 seconds
     }
 
     function extractUser2IDFromURL(url) {
