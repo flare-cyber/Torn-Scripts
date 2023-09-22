@@ -18,28 +18,38 @@
             const targetElement = document.querySelector("#react-root > div > div.appWrapper___ArZmW > div.headerWrap___SRCoT > div.bottomSection___uDzzT > div.potWrap___fSdxd")
 
             if (targetElement) {
+                createButton("Shoot Early 1", "1");
+                createButton("Shoot Early 2", "2");
+                createButton("Shoot Early 3", "3");
+            }
+        },1000); // Check after 1 seconds
+    }
+
+    function createButton(label, shots){
+                const targetElement = document.querySelector("#react-root > div > div.appWrapper___ArZmW > div.headerWrap___SRCoT > div.bottomSection___uDzzT > div.potWrap___fSdxd")
                 const Button = document.createElement('button');
-                Button.textContent = 'Shoot Early';
+                Button.textContent = label;
                 Button.style.backgroundColor = 'grey';
                 Button.style.color = 'white';
                 Button.style.padding = '10px';
                 Button.style.border = 'none';
                 Button.style.cursor = 'pointer';
-                Button.style.width = '100px';
+                Button.style.width = '90px';
+                Button.style.height = '44px';
 
-                Button.style.marginLeft = '50px';
+                Button.style.marginLeft = '40px';
 
                 // Add a click event listener to the button
-                Button.addEventListener('click', performRequest);
+                 Button.addEventListener('click', function () {
+                     performRequest(shots);
+                 });
 
                 // Append the button to the target element
                 targetElement.appendChild(Button);
-            }
-        },1000); // Check after 1.5 seconds
     }
 
     // Function to perform the fetch request
-    function performRequest() {
+    function performRequest(shot) {
         var rfc = getRfcVToken();
         fetch("https://www.torn.com/page.php?sid=russianRouletteData&rfcv=" + rfc, {
             "headers": {
@@ -56,7 +66,7 @@
             },
             "referrer": "https://www.torn.com/page.php?sid=russianRoulette",
             "referrerPolicy": "strict-origin-when-cross-origin",
-            "body": "------WebKitFormBoundarysjciiQrGixS0J6tF\r\nContent-Disposition: form-data; name=\"step\"\r\n\r\nmakeTurn\r\n------WebKitFormBoundarysjciiQrGixS0J6tF\r\nContent-Disposition: form-data; name=\"shotsAmount\"\r\n\r\n1\r\n------WebKitFormBoundarysjciiQrGixS0J6tF--\r\n",
+            "body": `------WebKitFormBoundarysjciiQrGixS0J6tF\r\nContent-Disposition: form-data; name=\"step\"\r\n\r\nmakeTurn\r\n------WebKitFormBoundarysjciiQrGixS0J6tF\r\nContent-Disposition: form-data; name=\"shotsAmount\"\r\n\r\n${shot}\r\n------WebKitFormBoundarysjciiQrGixS0J6tF--\r\n`,
             "method": "POST",
             "mode": "cors",
             "credentials": "include"
